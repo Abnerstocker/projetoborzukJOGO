@@ -16,7 +16,8 @@
     objectiveBanner: document.getElementById('objectiveBanner'), objectiveText: document.getElementById('objectiveText'), objectiveStatus: document.getElementById('objectiveStatus'),
     threat: document.getElementById('threatLabel'), status: document.getElementById('statusMessage'), kills: document.getElementById('killValue'),
     boss: document.getElementById('bossWarning'), sound: document.getElementById('soundButton'), soundLabel: document.getElementById('soundLabel'), dash: document.getElementById('dashButton'),
-    pause: document.getElementById('pauseButton'), contrast: document.getElementById('contrastButton'), motion: document.getElementById('motionButton')
+    pause: document.getElementById('pauseButton'), contrast: document.getElementById('contrastButton'), motion: document.getElementById('motionButton'),
+    textSize: document.getElementById('textSizeButton'), help: document.getElementById('helpButton'), helpDialog: document.getElementById('helpDialog'), helpClose: document.getElementById('helpClose')
   };
   const stages = [
     { name: 'MALWARE DE ROTINA', briefing: 'Elimine os vírus básicos e prepare sua defesa.', color: '#65e6d5' },
@@ -52,6 +53,8 @@
   const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
   let reducedMotion = motionPreference.matches;
   let motionPreferenceOverridden = false;
+  let largeText = false;
+  try { largeText = localStorage.getItem('firewallFrenzyLargeText') === 'true'; } catch { largeText = false; }
   let audioContext = null;
   let audioOutput = null;
   let distortionCurve = null;
@@ -95,6 +98,13 @@
     document.body.classList.toggle('allow-motion', !reducedMotion && motionPreference.matches);
     ui.motion.setAttribute('aria-pressed', String(reducedMotion));
     if (reducedMotion) game.shake = 0;
+  }
+
+  function setLargeText(enabled) {
+    largeText = enabled;
+    document.body.classList.toggle('large-text', largeText);
+    ui.textSize.setAttribute('aria-pressed', String(largeText));
+    try { localStorage.setItem('firewallFrenzyLargeText', String(largeText)); } catch { /* A preferência continua ativa nesta sessão. */ }
   }
 
   function setOverlay({ kicker, title, message, button, choices = false, controls = true, startScreen = false }) {
@@ -816,6 +826,12 @@
 
   ui.overlayButton.addEventListener('click', startFromOverlay);
   ui.endlessButton.addEventListener('click', startEndless);
+  ui.help.addEventListener('click', () => {
+    if (game.active && !game.paused) setPaused(true);
+    ui.helpDialog.showModal();
+    ui.helpClose.focus({ preventScroll: true });
+  });
+  ui.helpClose.addEventListener('click', () => ui.helpDialog.close());
   ui.pulse.addEventListener('click', usePulse);
   ui.dash.addEventListener('click', dash);
   ui.pause.addEventListener('click', () => setPaused(!game.paused));
@@ -827,11 +843,13 @@
     motionPreferenceOverridden = true;
     setReducedMotion(!reducedMotion);
   });
+  ui.textSize.addEventListener('click', () => setLargeText(!largeText));
   motionPreference.addEventListener('change', (event) => {
     if (!motionPreferenceOverridden) setReducedMotion(event.matches);
   });
   document.body.classList.toggle('reduce-motion', reducedMotion);
   ui.motion.setAttribute('aria-pressed', String(reducedMotion));
+  setLargeText(largeText);
   ui.sound.addEventListener('click', () => {
     soundEnabled = !soundEnabled;
     ui.sound.setAttribute('aria-pressed', String(soundEnabled));
@@ -842,6 +860,7 @@
 
   window.addEventListener('keydown', (event) => {
     const key = event.key.toLowerCase();
+    if (ui.helpDialog.open) return;
     if (key === 'p' || key === 'escape') {
       if (game.active) {
         event.preventDefault();

@@ -129,6 +129,24 @@ button:focus-visible, a:focus-visible, canvas:focus-visible { outline: 2px solid
 .start-school-logo { display: none; width: 76px; height: 76px; border: 1px solid var(--cyan); border-radius: 50%; object-fit: cover; }
 .game-overlay.start-screen .start-school-logo { position: absolute; right: 0; display: block; }
 .overlay-controls { display: flex; justify-content: center; flex-wrap: wrap; gap: 13px; margin-top: 16px; color: var(--muted); font-size: 7px; }
+.help-dialog { width: min(720px, calc(100% - 24px)); max-height: min(86vh, 760px); margin: auto; padding: 0; overflow-y: auto; border: 1px solid var(--cyan); background: var(--panel); color: var(--paper); box-shadow: 7px 7px 0 rgba(255, 111, 97, .65); }
+.help-dialog::backdrop { background: rgba(8, 10, 16, .84); }
+.help-dialog-content { padding: 22px 24px; }
+.help-dialog-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.help-dialog-heading .eyebrow { margin-bottom: 4px; }
+.help-dialog-heading h2 { margin: 0; color: var(--paper); font: 800 36px/.95 var(--display); }
+.help-close { min-height: 36px; padding: 0 11px; border: 1px solid var(--line); background: var(--panel-light); color: var(--paper); font: 9px var(--mono); cursor: pointer; }
+.help-close span { margin-left: 5px; color: var(--coral); font-size: 15px; }
+.help-intro, .help-accessibility-note { color: #c2c0c6; font-size: 12px; line-height: 1.55; }
+.help-intro { margin: 14px 0 18px; }
+.help-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.help-columns section { padding-top: 13px; border-top: 1px solid var(--line); }
+.help-columns h3 { margin: 0 0 10px; color: var(--cyan); font: 700 19px/.95 var(--display); }
+.help-columns dl { display: grid; gap: 10px; margin: 0; }
+.help-columns dl > div { display: grid; grid-template-columns: minmax(105px, .85fr) minmax(0, 1.3fr); gap: 8px; }
+.help-columns dt { color: var(--lime); font: 10px/1.45 var(--mono); }
+.help-columns dd { margin: 0; color: #d0ced1; font-size: 11px; line-height: 1.45; }
+.help-accessibility-note { margin: 18px 0 0; padding-top: 12px; border-top: 1px solid var(--line); }
 .upgrade-choices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 17px 0 14px; }
 .upgrade-choices[hidden] { display: none; }
 .upgrade-card { min-height: 98px; padding: 10px 8px; border: 1px solid #52505a; background: #292b35; color: var(--paper); text-align: left; cursor: pointer; transition: border-color .15s ease, background .15s ease, transform .15s ease; }
@@ -170,6 +188,12 @@ body.high-contrast .game-overlay { background: rgba(0, 0, 0, .96); }
 body.high-contrast .overlay-content { border-color: #ff0; background: #000; }
 body.high-contrast .game-overlay p, body.high-contrast .upgrade-card small { color: #fff; }
 body.high-contrast button:focus-visible, body.high-contrast a:focus-visible, body.high-contrast canvas:focus-visible { outline: 3px solid #fff; }
+body.large-text .section-label, body.large-text .operator-id p, body.large-text .tiny-note, body.large-text .control-line, body.large-text .accessibility-button, body.large-text .sound-button, body.large-text .power-button, body.large-text .game-footer, body.large-text .objective-banner { font-size: 10px; }
+body.large-text .keycap, body.large-text .field-toolbar { font-size: 9px; }
+body.large-text .control-line > span:last-child { flex: 1; min-width: 0; line-height: 1.4; }
+body.large-text .help-intro, body.large-text .help-accessibility-note { font-size: 14px; }
+body.large-text .help-columns dt { font-size: 11px; }
+body.large-text .help-columns dd { font-size: 13px; }
 body.reduce-motion *, body.reduce-motion *::before, body.reduce-motion *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 @keyframes blink { to { opacity: .4; } }
 @keyframes reveal { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
@@ -240,5 +264,9 @@ body.reduce-motion *, body.reduce-motion *::before, body.reduce-motion *::after 
   .upgrade-card strong { font-size: 13px; }
   .upgrade-card small { font-size: 7px; }
   .overlay-controls { gap: 8px; font-size: 6px; }
+  .help-dialog-content { padding: 18px 14px; }
+  .help-columns { grid-template-columns: 1fr; gap: 14px; }
+  .help-columns dl > div { grid-template-columns: minmax(105px, .8fr) minmax(0, 1.2fr); }
+  .help-dialog-heading h2 { font-size: 32px; }
 }
 @media (prefers-reduced-motion: reduce) { body:not(.allow-motion) *, body:not(.allow-motion) *::before, body:not(.allow-motion) *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }

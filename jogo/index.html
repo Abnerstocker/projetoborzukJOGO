@@ -78,6 +78,8 @@
           <div class="section-label"><span>06</span> ACESSIBILIDADE</div>
           <button class="accessibility-button" id="contrastButton" type="button" aria-pressed="false">ALTO CONTRASTE</button>
           <button class="accessibility-button" id="motionButton" type="button" aria-pressed="false">REDUZIR MOVIMENTO</button>
+          <button class="accessibility-button" id="textSizeButton" type="button" aria-pressed="false">TEXTO MAIOR</button>
+          <button class="accessibility-button help-button" id="helpButton" type="button" aria-haspopup="dialog" aria-controls="helpDialog">COMO JOGAR</button>
         </div>
 
         <button class="sound-button" id="soundButton" type="button" aria-pressed="true" aria-label="Desativar efeitos sonoros"><span aria-hidden="true">♫</span><span id="soundLabel">SOM ATIVADO</span></button>
@@ -111,6 +113,38 @@
         </div>
       </div>
     </section>
+    <dialog class="help-dialog" id="helpDialog" aria-labelledby="helpTitle">
+      <div class="help-dialog-content">
+        <div class="help-dialog-heading">
+          <div><p class="eyebrow">GUIA RÁPIDO // ACESSO LIVRE</p><h2 id="helpTitle" tabindex="-1">Como jogar</h2></div>
+          <button class="help-close" id="helpClose" type="button" aria-label="Fechar guia">FECHAR <span aria-hidden="true">×</span></button>
+        </div>
+        <p class="help-intro">Sobreviva às ondas de ameaças digitais. Elimine inimigos, complete objetivos bônus e escolha uma melhoria entre as fases. Vença cinco fases para liberar o modo infinito.</p>
+        <div class="help-columns">
+          <section aria-labelledby="computerControlsTitle">
+            <h3 id="computerControlsTitle">No computador</h3>
+            <dl>
+              <div><dt>WASD ou setas</dt><dd>Mover o agente.</dd></div>
+              <div><dt>Mouse</dt><dd>Mirar; segure o botão esquerdo para atirar.</dd></div>
+              <div><dt>Espaço</dt><dd>Atirar na direção da mira ou do inimigo mais próximo.</dd></div>
+              <div><dt>Shift</dt><dd>Usar o dash para escapar por um instante.</dd></div>
+              <div><dt>E</dt><dd>Ativar o pulso EMP quando a carga chegar a 100%.</dd></div>
+              <div><dt>P ou Esc</dt><dd>Pausar ou retomar a partida.</dd></div>
+            </dl>
+          </section>
+          <section aria-labelledby="touchControlsTitle">
+            <h3 id="touchControlsTitle">No celular</h3>
+            <dl>
+              <div><dt>Lado esquerdo da arena</dt><dd>Toque e arraste para mover.</dd></div>
+              <div><dt>Lado direito da arena</dt><dd>Toque e segure para mirar e atirar.</dd></div>
+              <div><dt>Botão Dash</dt><dd>Use o botão abaixo da arena para escapar.</dd></div>
+              <div><dt>Botão Pulso EMP</dt><dd>Ative-o no painel quando estiver carregado.</dd></div>
+            </dl>
+          </section>
+        </div>
+        <p class="help-accessibility-note">Acessibilidade: use os controles de alto contraste, movimento reduzido e texto maior no painel. O jogo também pode ser pausado a qualquer momento.</p>
+      </div>
+    </dialog>
     <footer class="page-footer"><span>BARBOSA FIREWALL FRENZY <i>/</i> UMA SIMULAÇÃO DE PÂNICO DIGITAL</span><span>SE DER TELA AZUL, ERA PARTE DO PLANO.</span></footer>
   </main>
 </body>
