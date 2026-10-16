@@ -16,7 +16,8 @@
     objectiveBanner: document.getElementById('objectiveBanner'), objectiveText: document.getElementById('objectiveText'), objectiveStatus: document.getElementById('objectiveStatus'),
     threat: document.getElementById('threatLabel'), status: document.getElementById('statusMessage'), kills: document.getElementById('killValue'),
     boss: document.getElementById('bossWarning'), sound: document.getElementById('soundButton'), soundLabel: document.getElementById('soundLabel'), dash: document.getElementById('dashButton'),
-    pause: document.getElementById('pauseButton'), contrast: document.getElementById('contrastButton'), motion: document.getElementById('motionButton'),
+    pause: document.getElementById('pauseButton'), restart: document.getElementById('restartButton'), restartDialog: document.getElementById('restartDialog'),
+    restartCancel: document.getElementById('restartCancel'), restartConfirm: document.getElementById('restartConfirm'), contrast: document.getElementById('contrastButton'), motion: document.getElementById('motionButton'),
     textSize: document.getElementById('textSizeButton'), help: document.getElementById('helpButton'), helpDialog: document.getElementById('helpDialog'), helpClose: document.getElementById('helpClose')
   };
   const stages = [
@@ -47,6 +48,7 @@
   let bestScore = 0;
   try { bestScore = Number(localStorage.getItem('firewallFrenzyBest')) || 0; } catch { bestScore = 0; }
   let game;
+  let resumeAfterRestartPrompt = false;
   let previousFrame = 0;
   let frameRequest = 0;
   let soundEnabled = true;
@@ -132,6 +134,7 @@
     ui.powerValue.textContent = `${Math.floor(game.pulse)}%`;
     ui.pulse.disabled = !game.active || game.pulse < 100;
     ui.pause.disabled = !game.active || game.ended;
+    ui.restart.disabled = game.wave === 0;
     ui.pause.setAttribute('aria-pressed', String(game.paused));
     ui.pause.setAttribute('aria-label', game.paused ? 'Retomar jogo' : 'Pausar jogo');
     ui.pause.textContent = game.paused ? '▶ RETOMAR' : 'Ⅱ PAUSAR';
@@ -832,6 +835,23 @@
     ui.helpClose.focus({ preventScroll: true });
   });
   ui.helpClose.addEventListener('click', () => ui.helpDialog.close());
+  ui.restart.addEventListener('click', () => {
+    resumeAfterRestartPrompt = game.active && !game.paused;
+    if (resumeAfterRestartPrompt) setPaused(true);
+    ui.restartDialog.showModal();
+    ui.restartCancel.focus({ preventScroll: true });
+  });
+  ui.restartCancel.addEventListener('click', () => ui.restartDialog.close());
+  ui.restartConfirm.addEventListener('click', () => {
+    resumeAfterRestartPrompt = false;
+    ui.restartDialog.close();
+    startGame();
+  });
+  ui.restartDialog.addEventListener('close', () => {
+    const shouldResume = resumeAfterRestartPrompt;
+    resumeAfterRestartPrompt = false;
+    if (shouldResume && game.paused) setPaused(false);
+  });
   ui.pulse.addEventListener('click', usePulse);
   ui.dash.addEventListener('click', dash);
   ui.pause.addEventListener('click', () => setPaused(!game.paused));
@@ -860,7 +880,7 @@
 
   window.addEventListener('keydown', (event) => {
     const key = event.key.toLowerCase();
-    if (ui.helpDialog.open) return;
+    if (ui.helpDialog.open || ui.restartDialog.open) return;
     if (key === 'p' || key === 'escape') {
       if (game.active) {
         event.preventDefault();

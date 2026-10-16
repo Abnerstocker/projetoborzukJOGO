@@ -109,7 +109,7 @@
         </div>
         <div class="game-footer">
           <div class="footer-tip"><span aria-hidden="true">✦</span><span id="statusMessage" aria-live="polite">Sua senha era “123456”, né?</span></div>
-          <div class="footer-controls"><button class="pause-button" id="pauseButton" type="button" aria-label="Pausar jogo" aria-pressed="false" aria-keyshortcuts="P Escape" disabled>Ⅱ PAUSAR</button><button class="touch-button dash-button" id="dashButton" type="button" aria-label="Usar dash"><span aria-hidden="true">↯</span> DASH</button><span class="boss-warning" id="bossWarning" hidden>⚠ CHEFE NA REDE</span><span class="kill-count">AMEAÇAS <strong id="killValue">00</strong></span></div>
+          <div class="footer-controls"><button class="pause-button" id="pauseButton" type="button" aria-label="Pausar jogo" aria-pressed="false" aria-keyshortcuts="P Escape" disabled>Ⅱ PAUSAR</button><button class="restart-button" id="restartButton" type="button" aria-label="Recomeçar partida" title="Recomeçar partida" disabled><span aria-hidden="true">↻</span><span class="restart-label">RECOMEÇAR</span></button><button class="touch-button dash-button" id="dashButton" type="button" aria-label="Usar dash"><span aria-hidden="true">↯</span> DASH</button><span class="boss-warning" id="bossWarning" hidden>⚠ CHEFE NA REDE</span><span class="kill-count">AMEAÇAS <strong id="killValue">00</strong></span></div>
         </div>
       </div>
     </section>
@@ -143,6 +143,16 @@
           </section>
         </div>
         <p class="help-accessibility-note">Acessibilidade: use os controles de alto contraste, movimento reduzido e texto maior no painel. O jogo também pode ser pausado a qualquer momento.</p>
+      </div>
+    </dialog>
+    <dialog class="help-dialog restart-dialog" id="restartDialog" aria-labelledby="restartTitle">
+      <div class="help-dialog-content">
+        <div class="help-dialog-heading">
+          <div><p class="eyebrow">CONFIRMAR AÇÃO</p><h2 id="restartTitle" tabindex="-1">Recomeçar partida?</h2></div>
+          <button class="help-close" id="restartCancel" type="button">CANCELAR</button>
+        </div>
+        <p class="help-intro">O progresso e a pontuação desta partida serão perdidos. Seu recorde salvo será mantido.</p>
+        <button class="overlay-button" id="restartConfirm" type="button"><span aria-hidden="true">↻</span> RECOMEÇAR</button>
       </div>
     </dialog>
     <footer class="page-footer"><span>BARBOSA FIREWALL FRENZY <i>/</i> UMA SIMULAÇÃO DE PÂNICO DIGITAL</span><span>SE DER TELA AZUL, ERA PARTE DO PLANO.</span></footer>

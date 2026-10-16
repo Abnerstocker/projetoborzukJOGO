@@ -162,6 +162,10 @@ button:focus-visible, a:focus-visible, canvas:focus-visible { outline: 2px solid
 .pause-button { min-height: 28px; padding: 4px 8px; border: 1px solid var(--lime); background: transparent; color: var(--lime); font: 700 calc(8px * var(--font-scale)) var(--mono); cursor: pointer; }
 .pause-button:hover:not(:disabled) { background: var(--lime); color: var(--ink); }
 .pause-button:disabled { opacity: .45; cursor: not-allowed; }
+.restart-button { min-height: 28px; display: inline-flex; align-items: center; justify-content: center; gap: 5px; padding: 4px 8px; border: 1px solid var(--coral); background: transparent; color: var(--coral); font: 700 calc(8px * var(--font-scale)) var(--mono); cursor: pointer; }
+.restart-button:hover:not(:disabled) { background: var(--coral); color: var(--ink); }
+.restart-button:disabled { opacity: .45; cursor: not-allowed; }
+.restart-button > span:first-child { font-size: calc(13px * var(--font-scale)); }
 .touch-button { display: none; }
 .boss-warning { color: var(--coral); animation: blink .55s steps(2, start) infinite; }
 .boss-warning[hidden] { display: none; }
@@ -251,6 +255,8 @@ body.reduce-motion *, body.reduce-motion *::before, body.reduce-motion *::after 
   .objective-banner strong { font-size: calc(7px * var(--font-scale)); }
   .game-footer { min-height: 34px; gap: 5px; padding: 0 7px; font-size: calc(6px * var(--font-scale)); }
   .footer-controls { gap: 7px; }
+  .restart-button { width: 28px; padding: 4px; }
+  .restart-label { display: none; }
   .touch-button { padding: 4px 5px; font-size: calc(7px * var(--font-scale)); }
   .kill-count { font-size: calc(6px * var(--font-scale)); }
   .page-footer { min-height: 43px; font-size: calc(6px * var(--font-scale)); }
