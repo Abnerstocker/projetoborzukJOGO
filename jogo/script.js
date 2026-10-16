@@ -18,6 +18,7 @@
     boss: document.getElementById('bossWarning'), sound: document.getElementById('soundButton'), soundLabel: document.getElementById('soundLabel'), dash: document.getElementById('dashButton'),
     pause: document.getElementById('pauseButton'), restart: document.getElementById('restartButton'), restartDialog: document.getElementById('restartDialog'),
     restartCancel: document.getElementById('restartCancel'), restartConfirm: document.getElementById('restartConfirm'), contrast: document.getElementById('contrastButton'), motion: document.getElementById('motionButton'),
+    home: document.getElementById('homeButton'),
     textSize: document.getElementById('textSizeButton'), help: document.getElementById('helpButton'), helpDialog: document.getElementById('helpDialog'), helpClose: document.getElementById('helpClose')
   };
   const stages = [
@@ -178,6 +179,18 @@
     unlockAudio();
     beginWave(1);
     canvas.focus({ preventScroll: true });
+  }
+
+  function returnToTitle() {
+    game = newGame();
+    keys.clear();
+    pointer.firing = false;
+    pointer.mode = '';
+    ui.network.textContent = 'REDE EM RISCO';
+    ui.status.textContent = 'Sua senha era “123456”, né?';
+    setOverlay({ kicker: 'ALERTA DE SEGURANÇA // 404', title: 'Seu antivírus<br><span>pediu demissão.</span>', message: 'Vírus por todo lado. Você, um blaster e três vidas. Parece um plano.', button: '<span aria-hidden="true">▶</span> INICIAR A INVASÃO', startScreen: true });
+    updateHud();
+    ui.overlayButton.focus({ preventScroll: true });
   }
 
   function startEndless() {
@@ -829,6 +842,7 @@
 
   ui.overlayButton.addEventListener('click', startFromOverlay);
   ui.endlessButton.addEventListener('click', startEndless);
+  ui.home.addEventListener('click', returnToTitle);
   ui.help.addEventListener('click', () => {
     if (game.active && !game.paused) setPaused(true);
     ui.helpDialog.showModal();

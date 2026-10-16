@@ -46,8 +46,11 @@ button:focus-visible, a:focus-visible, canvas:focus-visible { outline: 2px solid
 .status-light { width: 8px; height: 8px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 12px var(--lime); animation: blink 1.2s steps(2, start) infinite; }
 .game-heading { display: flex; justify-content: space-between; align-items: end; gap: 30px; padding: 25px 0 23px; }
 .eyebrow { margin: 0 0 5px; color: var(--cyan); font-size: calc(9px * var(--font-scale)); }
+.title-row { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; }
 .title-lockup h1 { margin: 0; font: 800 calc(46px * var(--font-scale))/.9 var(--display); }
 .title-lockup h1 span { color: var(--lime); }
+.home-button { min-height: 36px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 0 10px; border: 1px solid var(--cyan); background: transparent; color: var(--cyan); font: 700 calc(9px * var(--font-scale)) var(--mono); cursor: pointer; white-space: nowrap; }
+.home-button:hover { background: var(--cyan); color: var(--ink); }
 .scoreboard { display: flex; align-items: stretch; }
 .score-cell { min-width: 105px; display: grid; align-content: center; gap: 4px; padding: 0 20px; border-left: 1px solid var(--line); }
 .score-cell:last-child { padding-right: 2px; }
@@ -231,6 +234,8 @@ body.reduce-motion *, body.reduce-motion *::before, body.reduce-motion *::after 
   .network-status { gap: 6px; font-size: calc(7px * var(--font-scale)); }
   .status-light { width: 6px; height: 6px; }
   .game-heading { padding: 21px 0 17px; }
+  .title-row { gap: 8px; }
+  .home-button { min-height: 32px; padding: 0 8px; }
   .title-lockup h1 { font-size: calc(39px * var(--font-scale)); }
   .eyebrow { font-size: calc(8px * var(--font-scale)); }
   .score-cell { min-width: 0; padding: 0 9px; }
