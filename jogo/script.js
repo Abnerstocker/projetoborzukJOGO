@@ -683,7 +683,7 @@
     }
     ctx.globalAlpha = 1;
     ctx.fillStyle = 'rgba(101, 230, 213, .48)';
-    ctx.font = '9px monospace';
+    ctx.font = '11px monospace';
     ctx.fillText('SECURE CONNECTION: NOPE', 17, 23);
     ctx.fillStyle = stage.color;
     ctx.fillText(`FASE ${String(Math.max(1, game.wave)).padStart(2, '0')} // ${stage.name}`, 17, 39);
