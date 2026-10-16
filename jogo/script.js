@@ -254,7 +254,7 @@
       setOverlay({ kicker: 'AMEAÇA ELIMINADA // 5 DE 5', title: 'A internet está<br><span>menos pior.</span>', message: `Você fez ${game.score.toLocaleString('pt-BR')} pontos e salvou a rede. O suporte vai chamar isso de “manutenção”.`, button: '<span aria-hidden="true">↻</span> JOGAR DE NOVO' });
       ui.status.textContent = 'Você venceu. Agora atualize o roteador, só por precaução.';
     } else {
-      setOverlay({ kicker: `FALHA DE SEGURANÇA // FASE ${String(game.wave).padStart(2, '0')}`, title: 'Deu tela<br><span>azul.</span>', message: `Você eliminou ${game.kills} ameaças e marcou ${game.score.toLocaleString('pt-BR')} pontos. O antivírus continua desempregado.`, button: '<span aria-hidden="true">↻</span> TENTAR DE NOVO' });
+      setOverlay({ kicker: `FALHA DE SEGURANÇA // FASE ${String(game.wave).padStart(2, '0')}`, title: 'Deu tela<br><span>azul.</span>', message: `Você eliminou ${game.kills} ameaças e marcou ${game.score.toLocaleString('pt-BR')} pontos. O antivírus continua desempregado.`, button: '<span aria-hidden="true">↻</span> TENTAR NOVAMENTE' });
       ui.status.textContent = 'O sistema encontrou um problema e precisa reiniciar.';
     }
     ui.endlessButton.hidden = !won;
