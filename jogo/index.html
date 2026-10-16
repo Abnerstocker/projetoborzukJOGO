@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171923">
+  <meta name="description" content="Um arcade de sobrevivência digital. Desvie dos vírus, dispare contra o caos e proteja a rede.">
+  <title>Barbosa Firewall Frenzy | Arcade de sobrevivência</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#gameCanvas">Pular para a arena</a>
+  <main class="arcade-shell">
+    <header class="topbar">
+      <a class="brand" href="#jogo" aria-label="Barbosa Firewall Frenzy, início">
+        <img class="school-logo" src="assets/colegio.jpg" alt="Brasão do Colégio Estadual Barbosa Ferraz">
+        <span class="brand-copy">
+          <strong>BARBOSA FIREWALL FRENZY</strong>
+          <small>ARQUIVO DE INCIDENTE Nº 404</small>
+          <small class="student-details"><span>ALUNO: ABNER STOCKER</span><span>2° D.S</span></small>
+        </span>
+      </a>
+      <div class="network-status"><span class="status-light" aria-hidden="true"></span><span id="networkStatus">REDE EM RISCO</span></div>
+    </header>
+
+    <section class="game-heading" id="jogo" aria-label="Painel do jogo">
+      <div class="title-lockup"><p class="eyebrow">PROTOCOLO DE EMERGÊNCIA // 09</p><h1>O caos está <span>online.</span></h1></div>
+      <div class="scoreboard" aria-label="Placar">
+        <div class="score-cell"><span>PONTUAÇÃO</span><strong id="scoreValue">000000</strong></div>
+        <div class="score-cell best-cell"><span>RECORDE</span><strong id="bestValue">000000</strong></div>
+        <div class="score-cell combo-cell"><span>COMBO</span><strong id="comboValue">x1</strong></div>
+      </div>
+    </section>
+
+    <section class="arcade-layout" aria-label="Arena de jogo">
+      <aside class="operator-panel" aria-label="Painel do operador">
+        <div class="panel-section operator-id">
+          <div class="section-label"><span>01</span> OPERADOR</div>
+          <div class="pilot-badge" aria-hidden="true"><span>◈</span><i></i></div>
+          <h2>Agente Zero</h2>
+          <p>Firewall humano. Péssima ideia, ótima mira.</p>
+        </div>
+
+        <div class="panel-section life-section">
+          <div class="section-label"><span>02</span> INTEGRIDADE</div>
+          <div class="life-row" id="lifeRow" aria-label="3 vidas">
+            <span class="life-pip is-alive" aria-hidden="true">◆</span>
+            <span class="life-pip is-alive" aria-hidden="true">◆</span>
+            <span class="life-pip is-alive" aria-hidden="true">◆</span>
+          </div>
+          <p class="tiny-note" id="lifeMessage">Sem backup. Sem pressão.</p>
+        </div>
+
+        <div class="panel-section wave-section">
+          <div class="section-label"><span>03</span> FASE ATUAL</div>
+          <div class="wave-readout"><strong id="waveValue">01</strong><span>/ <span id="waveTotal">05</span></span><span class="wave-name" id="waveName">MALWARE DE ROTINA</span></div>
+          <div class="wave-track" aria-label="Progresso da fase"><span id="waveProgress"></span></div>
+        </div>
+
+        <div class="panel-section power-section">
+          <div class="section-label"><span>04</span> SOBRECARGA</div>
+          <div class="power-meter"><div class="power-track"><span id="powerBar"></span></div><strong id="powerValue">35%</strong></div>
+          <button class="power-button" id="pulseButton" type="button" disabled><span aria-hidden="true">✳</span> PULSO EMP</button>
+          <p class="tiny-note">Explode tudo perto de você.</p>
+        </div>
+
+        <div class="panel-section controls-section">
+          <div class="section-label"><span>05</span> MANUAL DE SOBREVIVÊNCIA</div>
+          <div class="control-line"><span class="keycap">WASD</span><span>Mover agente</span></div>
+          <div class="control-line"><span class="keycap">MOUSE</span><span>Mirar e atirar</span></div>
+          <div class="control-line"><span class="keycap">SHIFT</span><span>Dash elétrico</span></div>
+          <div class="control-line"><span class="keycap">E</span><span>Descarga EMP</span></div>
+          <div class="control-line mobile-instruction"><span class="keycap">TOQUE</span><span>Mova à esquerda, atire à direita</span></div>
+        </div>
+
+        <div class="panel-section accessibility-section" role="group" aria-label="Opções de acessibilidade">
+          <div class="section-label"><span>06</span> ACESSIBILIDADE</div>
+          <button class="accessibility-button" id="contrastButton" type="button" aria-pressed="false">ALTO CONTRASTE</button>
+          <button class="accessibility-button" id="motionButton" type="button" aria-pressed="false">REDUZIR MOVIMENTO</button>
+        </div>
+
+        <button class="sound-button" id="soundButton" type="button" aria-pressed="true" aria-label="Desativar efeitos sonoros"><span aria-hidden="true">♫</span><span id="soundLabel">SOM ATIVADO</span></button>
+      </aside>
+
+      <div class="game-column">
+        <div class="field-toolbar">
+          <div class="field-location"><span class="live-tag"><i></i> AO VIVO</span><span>REDE LOCAL // 127.0.0.1</span></div>
+          <div class="threat-label" id="threatLabel">AGUARDANDO CONEXÃO</div>
+        </div>
+        <div class="objective-banner" id="objectiveBanner" aria-live="polite" hidden><span class="objective-label">OBJETIVO BÔNUS</span><span id="objectiveText"></span><strong id="objectiveStatus"></strong></div>
+        <div class="canvas-frame">
+          <canvas id="gameCanvas" width="960" height="600" aria-label="Arena de sobrevivência: mova-se, mire e elimine as ameaças digitais" tabindex="0"></canvas>
+          <section class="game-overlay" id="gameOverlay" aria-live="polite">
+            <div class="overlay-content">
+              <div class="overlay-alert">
+                <span class="overlay-kicker" id="overlayKicker">ALERTA DE SEGURANÇA // 404</span>
+                <img class="start-school-logo" src="assets/colegio.jpg" alt="Brasão do Colégio Estadual Barbosa Ferraz">
+              </div>
+              <h2 id="overlayTitle">Seu antivírus<br><span>pediu demissão.</span></h2>
+              <p id="overlayMessage">Cinco fases, cada uma com uma nova ameaça. Sobreviva, escolha melhorias e derrote o Bug Final.</p>
+              <div class="upgrade-choices" id="upgradeChoices" hidden></div>
+              <div class="overlay-actions"><button class="overlay-button" id="overlayButton" type="button"><span aria-hidden="true">▶</span> INICIAR A INVASÃO</button><button class="overlay-button endless-button" id="endlessButton" type="button" hidden><span aria-hidden="true">∞</span> CONTINUAR NO INFINITO</button></div>
+              <div class="overlay-controls"><span>WASD MOVER</span><span>CLIQUE ATIRAR</span><span>SHIFT DASH</span><span>P PAUSAR</span></div>
+            </div>
+          </section>
+        </div>
+        <div class="game-footer">
+          <div class="footer-tip"><span aria-hidden="true">✦</span><span id="statusMessage" aria-live="polite">Sua senha era “123456”, né?</span></div>
+          <div class="footer-controls"><button class="pause-button" id="pauseButton" type="button" aria-label="Pausar jogo" aria-pressed="false" aria-keyshortcuts="P Escape" disabled>Ⅱ PAUSAR</button><button class="touch-button dash-button" id="dashButton" type="button" aria-label="Usar dash"><span aria-hidden="true">↯</span> DASH</button><span class="boss-warning" id="bossWarning" hidden>⚠ CHEFE NA REDE</span><span class="kill-count">AMEAÇAS <strong id="killValue">00</strong></span></div>
+        </div>
+      </div>
+    </section>
+    <footer class="page-footer"><span>BARBOSA FIREWALL FRENZY <i>/</i> UMA SIMULAÇÃO DE PÂNICO DIGITAL</span><span>SE DER TELA AZUL, ERA PARTE DO PLANO.</span></footer>
+  </main>
+</body>
+</html>
